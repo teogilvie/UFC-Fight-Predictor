@@ -1,0 +1,11 @@
+.formbox {
+  background-color: var(--color-main--2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 80vw;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+  color: #fff;
+  row-gap: 2.4rem;
+}

@@ -1,0 +1,11 @@
+Stats to add:
+-height
+-arm reach
+-leg reach
+
+Front end:
+-Make a dropdown when the user is typing the name of a fighter that will filter the results of a fetch to the getAllFighters endpoint
+-This will give them a list of fighters to select from. 
+-When the user selects a fighter, the fighters object will be populated at fighters.fighter1.id and then at fighters.fighter2.id
+-It will be filled with the id rather than searching for the first and last name from the fighters object. 
+-This fighters object will be the body of the endpoint request

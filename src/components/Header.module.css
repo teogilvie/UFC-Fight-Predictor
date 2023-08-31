@@ -1,0 +1,15 @@
+.header {
+  max-width: 80vw;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 4.8rem;
+}
+
+.headerContent h1 {
+  font-size: 3rem;
+}
