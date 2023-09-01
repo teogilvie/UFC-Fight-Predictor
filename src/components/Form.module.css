@@ -1,12 +1,12 @@
 .form {
   display: flex;
   flex-direction: column;
-  padding: 1.2rem;
+  padding: 2.4rem 3.6rem 15rem 3.6rem;
   gap: 1.2rem;
 }
 
 .form h3 {
-  font-size: 2.4rem;
+  font-size: 3.6rem;
 }
 
 .form label {
@@ -14,9 +14,9 @@
 }
 
 .form input {
-  font-size: 1.8rem;
+  font-size: 3.6rem;
   background-color: none;
   border: none;
   border-radius: 4px;
-  padding: 8px 2px;
+  padding: 8px 4px;
 }

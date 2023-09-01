@@ -1,7 +1,7 @@
 .header {
   max-width: 80vw;
   margin: 0 auto;
-  color: #fff;
+  color: var(--color-dark--2);
 }
 
 .headerContent {
@@ -11,5 +11,5 @@
 }
 
 .headerContent h1 {
-  font-size: 3rem;
+  font-size: 4.8rem;
 }

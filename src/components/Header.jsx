@@ -6,7 +6,7 @@ function Header() {
     <div className={style.header}>
       <div className={style.headerContent}>
         <h1>Fight Predictor</h1>
-        <Button>Fighter API</Button>
+        {/* <Button>Fighter API</Button> */}
       </div>
     </div>
   );

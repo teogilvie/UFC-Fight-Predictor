@@ -15,7 +15,6 @@ function App() {
         <Button addClass={"btn--submit-fighters"}>Predict</Button>
       </FormBox>
       <Results />
-      <Footer />
     </section>
   );
 }

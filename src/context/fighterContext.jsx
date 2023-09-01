@@ -1,9 +1,9 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const FighterContext = createContext();
 
-const BASE_URL = "localhost:8000";
-
+const BASE_URL = "http://127.0.0.1:3000";
+/*
 const testFighter1 = {
   age: 21,
   height: 180,
@@ -28,10 +28,10 @@ const testFighter2 = {
   strikesPerMinute: 2.0,
   takedownsPerMinute: 8.0,
 };
+*/
 
 const initialState = {
-  figher1: testFighter1,
-  figher2: testFighter2,
+  objFighters: {},
   isLoading: false,
   winner: null,
 };
@@ -41,15 +41,13 @@ function reducer(state, action) {
     case "getFighters/start":
       return {
         ...state,
-        fighter1: action.payload.fighter1,
-        fighter2: action.payload.fighter2,
         isLoading: true,
       };
     case "getFighters/finish":
       return {
         ...state,
-        winner: action.payload,
-        isLoading: true,
+        objFighters: action.payload,
+        isLoading: false,
       };
     case "predict/start":
       return {
@@ -72,32 +70,40 @@ function reducer(state, action) {
 }
 
 function FighterProvider({ children }) {
-  const [{ fighter1, fighter2, isLoading }, dispatch] = useReducer(
+  const [{ objFighters, isLoading }, dispatch] = useReducer(
     reducer,
     initialState
   );
+  useEffect(function () {
+    async function getFighterStats() {
+      dispatch({ type: "getFighters/start" });
 
-  async function getFighterStats() {
-    dispatch({ type: "getFighters/start" });
+      try {
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        };
 
-    try {
-      const res = await fetch(`${BASE_URL}/fighters`, {
-        method: "GET",
-      });
-      const data = await res.json();
+        const res = await fetch(`${BASE_URL}/app/v1/fighters/`, requestOptions);
+        const data = await res.json();
 
-      dispatch({ type: "getFighters/finish", payload: data });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "There was an error calling API...",
-      });
+        dispatch({ type: "getFighters/finish", payload: data });
+      } catch {
+        dispatch({
+          type: "rejected",
+          payload: "There was an error calling API...",
+        });
+      }
     }
-  }
+    getFighterStats();
+  }, []);
 
   async function getFightPrediction() {
     dispatch({ type: "predict/start" });
-    const fighters = { fighter1, fighter2 };
+    const fighters = objFighters;
 
     try {
       const res = await fetch(`${BASE_URL}/prediction`, {
@@ -119,11 +125,9 @@ function FighterProvider({ children }) {
   return (
     <FighterContext.Provider
       value={{
-        fighter1,
-        fighter2,
+        objFighters,
         isLoading,
         getFightPrediction,
-        getFighterStats,
       }}
     >
       {children}
